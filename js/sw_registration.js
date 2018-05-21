@@ -5,9 +5,6 @@ console.log('Registration Worked!');
 		return;
 	}
 
-   if(reg.waiting){
-   	navigator.serviceWorker.controller.postMessage({ action: 'skipWaiting' });
-    }
    }).catch(function () {
     console.log('Registration Failed!');
 });
