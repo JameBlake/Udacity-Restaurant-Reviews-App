@@ -30,16 +30,19 @@ self.addEventListener('install', function(event){
 
 
 self.addEventListener('fetch', function(event){
-	console.log(event.request);
+	const url = new URL(event.request.url);
+	console.log(url);
 	event.respondWith(
-		caches.match(event.request).then(function(response){
+		caches.match(url.pathname).then(function(response){
 			if(response){
-				console.log(event.request.url);
+				console.log(url.pathname);
 				return response
 			}
+			return fetch(event.request);
 		}).catch(function(error){
 			console.log('Error:', error);
 			return;
 		})
 	);
 });
+
